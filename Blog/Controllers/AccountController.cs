@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Blog.Models;
+using System.Data.Entity.Validation;
+
 
 namespace Blog.Controllers
 {
@@ -155,6 +157,14 @@ namespace Blog.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var _context = new ApplicationDbContext();
+                    var registeredUser = _context.Users.FirstOrDefault(u => u.UserName == model.Email);
+                    Profile profile = new Profile { Name = model.Name, Age = model.Age};
+                    profile.User = registeredUser;
+                    _context.Profiles.Add(profile);
+                    _context.SaveChanges();
+
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
