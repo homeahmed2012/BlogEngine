@@ -1,0 +1,30 @@
+﻿@model Blog.Models.Post
+
+@{
+    ViewBag.Title = "post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="max-width: 728px; margin-left: auto; margin-right: auto">
+    <h1 class="mt-4">@Model.Title</h1>
+
+    <!-- Author -->
+    <p class="lead">
+        by
+        <a href="#">Start Bootstrap</a>
+    </p>
+
+    <!-- Date/Time -->
+    <p style="color: rgba(0, 0, 0, 0.54)">Posted on January 1, 2019 at 12:00 PM</p>
+
+    <hr>
+
+    <div>
+        @Model.Text
+    </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+</div>

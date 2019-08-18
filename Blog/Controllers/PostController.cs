@@ -44,11 +44,11 @@ namespace Blog.Controllers
         }
 
         [HttpGet]
-        //public ActionResult Index(int id)
-        //{
-        //    Post post = _context.Posts.Find(id);
-        //    return View();
-        //}
+        public ActionResult Detail(int id)
+        {
+            Post post = _context.Posts.Find(id);
+            return View(post);
+        }
 
         public ActionResult Add()
         {
