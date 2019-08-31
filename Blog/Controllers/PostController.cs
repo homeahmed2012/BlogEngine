@@ -75,5 +75,24 @@ namespace Blog.Controllers
             // else return Unauthorized
             return new HttpUnauthorizedResult();
         }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var post = _context.Posts.Find(id);
+            return View(post);
+
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, Post post)
+        {
+            var oldPost = _context.Posts.Find(id);
+            oldPost.Title = post.Title;
+            oldPost.Text = post.Text;
+            _context.SaveChanges();
+
+            return RedirectToAction("Detail", new { id = oldPost.Id });
+        }
     }
 }
